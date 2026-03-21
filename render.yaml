@@ -1,0 +1,24 @@
+# render.yaml — place at crypto_api/ repo root
+# Render reads this file and auto-configures the backend service.
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: crypto-api
+    runtime: python
+    plan: free                 # free tier: spins down after 15 min inactivity
+
+    # Build: install deps
+    buildCommand: pip install -r requirements.txt
+
+    # Start: run uvicorn from repo root (main.py is here)
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+
+    # Tell Render where the repo root is
+    rootDir: .
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+
+    # Render clones submodules automatically if they are in .gitmodules
