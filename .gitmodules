@@ -4,6 +4,3 @@
 [submodule "crypto_systems"]
 	path = crypto_systems
 	url = https://github.com/MythischGT/crypto_systems.git
-[submodule "crypto_frontend"]
-	path = crypto_frontend
-	url = https://github.com/MythischGT/crypto_frontend.git
