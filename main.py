@@ -15,8 +15,6 @@ crypto_api  —  main.py  (lives at the repo root)
 Run from crypto_api/:
     pip install fastapi uvicorn
     uvicorn main:app --reload
-
-Docs → http://localhost:8000/docs
 """
 import os
 import sys
