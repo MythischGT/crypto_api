@@ -1,40 +1,22 @@
-# crypto_api
+# 🔐 Crypto API
 
-Unified REST API over two pure-Python cryptography libraries.
+A unified, high-performance REST API built over two pure-Python cryptography libraries. 
 
-## Repository layout
+This API serves as the backend engine for cryptographic operations, exposing endpoints for Prime Field arithmetic, Elliptic Curve validation, Number Theory utilities, and secure Key Exchanges.
 
-```
+## 🗂️ Repository Layout
+
+The project relies on two core cryptographic libraries managed as Git submodules, wrapped by a modern FastAPI application.
+
+```text
 crypto_api/
-├── galoiscore/          # git submodule — galois_core primitives
-├── crypto_systems/      # git submodule — cryptographic protocols
-├── api/
-│   ├── main.py
+├── galoiscore/          # Git submodule: Core Galois field & ECC primitives
+├── crypto_systems/      # Git submodule: High-level cryptographic protocols
+├── api/                 # FastAPI Application
 │   └── routers/
-│       ├── field.py     # /api/field   — GF(p) arithmetic
-│       ├── ecc.py       # /api/ecc     — elliptic curves
-│       ├── utils.py     # /api/utils   — number theory
-│       └── dhke.py      # /api/crypto/dhke — Diffie-Hellman
+│       ├── field.py     # /api/field        → GF(p) arithmetic
+│       ├── ecc.py       # /api/ecc          → Elliptic Curve operations
+│       ├── utils.py     # /api/utils        → Number theory (Primes, GCD)
+│       └── dhke.py      # /api/crypto/dhke  → Diffie-Hellman Key Exchange
 └── requirements.txt
-```
-
-## Setup
-
-```bash
-# Clone with submodules
-git clone --recurse-submodules https://github.com/youruser/crypto_api
-
-pip install -r requirements.txt
-uvicorn api.main:app --reload
-```
-
-Interactive docs → http://localhost:8000/docs
-
-## DHKE flow
-
-```
-POST /api/crypto/dhke/keypair        {"bits": 2048}  → Alice keypair
-POST /api/crypto/dhke/keypair        {"bits": 2048}  → Bob keypair
-POST /api/crypto/dhke/shared_secret  {Alice priv + Bob pub}  → secret
-POST /api/crypto/dhke/derive_key     {"secret": "...", "length": 32} → AES key
-```
+└── main.py          # Application entry point
